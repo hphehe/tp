@@ -129,12 +129,12 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2627S1-CS2103T-T15-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 
 The `Model` component,
 
-* stores Cindy's client data i.e., all `Person` objects (which are contained in a `UniquePersonList` object). Each `Person` has a unique `PersonId`, up to four `Appointment` objects, and any number of `Session` records. `AddressBook` also stores the next `PersonId` to give out, so IDs are never reused, even after a client is deleted.
+* stores Cindy's client data i.e., all `Person` objects (which are contained in a `UniquePersonList` object). Each `Person` has a unique `PersonId`, up to four `Appointment` objects, and any number of `Session` records. `AddressBook` also stores the next `PersonId` to give out, so IDs are not reused after a client is deleted. The exception is `clear --confirm`, which replaces the address book with an empty one, so numbering starts again from 1.
 * stores the custom groups (e.g. `morning`, `rehab`) as a list of `Tag` objects in `AddressBook`, in the order they were created. Every custom tag of a `Person` is also one of these groups, so a client can never be in a group that does not exist. `gym` and `personal` are built-in client types, not groups.
 * stores the `Person` objects selected by the current filter, such as search results, in a separate _filtered_ list, which is kept sorted alphabetically by name (case-insensitive) unless a command gives another order. `list --today`, for example, sorts clients by their earliest appointment today. It exposes this list as an unmodifiable `ObservableList<Person>` that the UI can observe and bind to, so the UI updates when the list changes.
 * stores a `UserPrefs` object that represents the user’s preferences (currently, just the GUI settings). This is exposed to the outside as a `ReadOnlyUserPrefs` object.
